@@ -1,4 +1,4 @@
-FROM java:8-alpine
+FROM amazoncorretto:21.0.1-al2023-headless
 
 RUN apk add --update ca-certificates && rm -rf /var/cache/apk/* && \
   find /usr/share/ca-certificates/mozilla/ -name "*.crt" -exec keytool -import -trustcacerts \
@@ -6,7 +6,7 @@ RUN apk add --update ca-certificates && rm -rf /var/cache/apk/* && \
   -file {} -alias {} \; && \
   keytool -list -keystore /usr/lib/jvm/java-1.8-openjdk/jre/lib/security/cacerts --storepass changeit
 
-ENV MAVEN_VERSION 3.5.4
+ENV MAVEN_VERSION 3.9.5
 ENV MAVEN_HOME /usr/lib/mvn
 ENV PATH $MAVEN_HOME/bin:$PATH
 
